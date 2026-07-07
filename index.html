@@ -729,6 +729,149 @@
     color: var(--text-muted);
   }
 
+  /* YouTube & Awesome Links sections */
+  .yt-section, .awesome-section {
+    margin-top: 20px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+  }
+
+  .yt-section h3, .awesome-section h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .yt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+
+  .yt-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: block;
+  }
+
+  .yt-card:hover {
+    border-color: #FF0000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(255,0,0,0.1);
+  }
+
+  .yt-card .yt-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    color: #FF4444;
+    font-weight: 600;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .yt-card .yt-t {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+
+  .yt-card .yt-d {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .awesome-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .awesome-category {
+    margin-bottom: 16px;
+  }
+
+  .awesome-category h4 {
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cat-aidd h4 { color: var(--accent2); }
+  .cat-ai4s h4 { color: var(--accent); }
+  .cat-protein h4 { color: var(--accent3); }
+  .cat-antibody h4 { color: var(--gold); }
+  .cat-docking h4 { color: var(--primary-light); }
+
+  .aw-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .aw-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    text-decoration: none;
+    transition: all 0.2s;
+    flex: 1;
+    min-width: 240px;
+  }
+
+  .aw-link:hover {
+    border-color: var(--primary);
+    transform: translateY(-1px);
+  }
+
+  .aw-link .aw-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .aw-link .aw-info { flex: 1; min-width: 0; }
+
+  .aw-link .aw-name {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text);
+    display: block;
+  }
+
+  .aw-link .aw-desc {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .aw-link .aw-star {
+    font-size: 0.65rem;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
   /* Footer */
   .footer {
     position: relative; z-index: 1;
@@ -770,7 +913,7 @@
 
 <!-- Hero -->
 <div class="hero">
-  <div class="lab-badge">🧬 가천대학교 남승윤 교수 연구실</div>
+  <div class="lab-badge">🧬 가천대학교 남승윤 · 서승용 · 이진혁 교수 연구실</div>
   <h1>21일 바이브 코딩 ×<br>AI 신약개발 부트캠프</h1>
   <p class="hero-sub">
     AI 코딩 도구와 실제 타겟(TEAD-YAP, EGFRvIII, DDR1, 나노바디)을 활용하여
@@ -788,7 +931,7 @@
     <div class="prof-header">
       <div class="prof-avatar">🔬</div>
       <div>
-        <div class="prof-name">남승윤 교수님 연구실</div>
+        <div class="prof-name">남승윤 · 서승용 · 이진혁 교수님 연구실</div>
         <div class="prof-title">가천대학교 · AI 기반 신약개발 연구</div>
       </div>
     </div>
@@ -1943,12 +2086,182 @@ tab1, tab2, tab3, tab4, tab5 = st.<span class="fn">tabs</span>([
   </div>
 </div>
 
+<!-- YouTube -->
+<div class="yt-section">
+  <h3>📺 추천 YouTube 강의</h3>
+  <div class="yt-grid">
+    <a class="yt-card" href="https://www.youtube.com/watch?v=10BQTL99z_E" target="_blank">
+      <div class="yt-icon">▶ YouTube</div>
+      <div class="yt-t">RDKit: Cheminformatics & Drug Discovery in Python</div>
+      <div class="yt-d">RDKit 전체 과정 — Jupyter 노트북으로 체계적 학습</div>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/watch?v=q4LCdv_pOpU" target="_blank">
+      <div class="yt-icon">▶ YouTube</div>
+      <div class="yt-t">RDKit Tutorial for AI and Chemistry</div>
+      <div class="yt-d">AI 맥락에서의 RDKit 실습 — 분자 발견 워크플로우</div>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/watch?v=GflTIcI5inA" target="_blank">
+      <div class="yt-icon">▶ YouTube</div>
+      <div class="yt-t">MIT MLCB 2024 — ML in Computational Biology</div>
+      <div class="yt-d">Manolis Kellis 교수 MIT 강의: 단백질 구조, 언어 모델, GNN, 분자 생성</div>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/watch?v=dQCcWnImSyw" target="_blank">
+      <div class="yt-icon">▶ YouTube</div>
+      <div class="yt-t">On the Future of AI for Drug Discovery</div>
+      <div class="yt-d">Valence Labs — Yoshua Bengio, Marinka Zitnik 패널 토론</div>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/watch?v=6gkA-_ldNhw" target="_blank">
+      <div class="yt-icon">▶ YouTube</div>
+      <div class="yt-t">How ML Could Accelerate Drug Discovery</div>
+      <div class="yt-d">Yoshua Bengio — ML 기반 약물 발견 가속화의 기초</div>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/@DataProfessor" target="_blank">
+      <div class="yt-icon">▶ YouTube</div>
+      <div class="yt-t">Data Professor — Bioinformatics & Drug Discovery</div>
+      <div class="yt-d">QSAR, 분자 기술자, Streamlit 약물 발견 앱 튜토리얼</div>
+    </a>
+  </div>
+</div>
+
+<!-- Awesome GitHub -->
+<div class="awesome-section">
+  <h3>⭐ Awesome GitHub 리포지토리</h3>
+
+  <div class="awesome-category cat-aidd">
+    <h4>🧪 AI Drug Discovery (AIDD)</h4>
+    <div class="aw-links">
+      <a class="aw-link" href="https://github.com/daiyun02211/awesome-AIDD" target="_blank">
+        <span class="aw-icon">📦</span>
+        <span class="aw-info">
+          <span class="aw-name">awesome-AIDD</span>
+          <span class="aw-desc">AI 약물 발견 논문/도구 — ADMET, 생성, 도킹 등 태스크별 정리</span>
+        </span>
+      </a>
+      <a class="aw-link" href="https://github.com/yboulaamane/awesome-drug-discovery" target="_blank">
+        <span class="aw-icon">📦</span>
+        <span class="aw-info">
+          <span class="aw-name">awesome-drug-discovery</span>
+          <span class="aw-desc">컴퓨터 약물 발견 리소스: 도구, 데이터셋, 벤치마크, 가상 스크리닝</span>
+        </span>
+      </a>
+      <a class="aw-link" href="https://github.com/yataobian/awesome-DrugAI" target="_blank">
+        <span class="aw-icon">📦</span>
+        <span class="aw-info">
+          <span class="aw-name">awesome-DrugAI</span>
+          <span class="aw-desc">AI 약물 설계 연구 목록 — de novo 설계, 리드 최적화</span>
+        </span>
+      </a>
+      <a class="aw-link" href="https://github.com/Bin-Chen-Lab/Awesome_BigData_AI_DrugDiscovery" target="_blank">
+        <span class="aw-icon">📦</span>
+        <span class="aw-info">
+          <span class="aw-name">Awesome BigData AI Drug Discovery</span>
+          <span class="aw-desc">빅데이터 + AI 신약개발 리소스 — 연구실 온보딩에 적합</span>
+        </span>
+      </a>
+      <a class="aw-link" href="https://github.com/PatWalters/practical_cheminformatics_tutorials" target="_blank">
+        <span class="aw-icon">📓</span>
+        <span class="aw-info">
+          <span class="aw-name">Practical Cheminformatics Tutorials</span>
+          <span class="aw-desc">28개 Colab 노트북 — RDKit, ML 모델링, SAR, 생성 모델 실습</span>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <div class="awesome-category cat-ai4s">
+    <h4>🔬 AI for Science (AI4S)</h4>
+    <div class="aw-links">
+      <a class="aw-link" href="https://github.com/ai-boost/awesome-ai-for-science" target="_blank">
+        <span class="aw-icon">📦</span>
+        <span class="aw-info">
+          <span class="aw-name">awesome-ai-for-science</span>
+          <span class="aw-desc">물리, 화학, 생물, 재료과학 AI 도구/논문/데이터셋 큐레이션</span>
+        </span>
+      </a>
+      <a class="aw-link" href="https://github.com/deepmodeling/AI4Science101" target="_blank">
+        <span class="aw-icon">📦</span>
+        <span class="aw-info">
+          <span class="aw-name">AI4Science101</span>
+          <span class="aw-desc">DeepModeling 커뮤니티 AI4S 입문 — MD, 단백질, 양자역학</span>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <div class="awesome-category cat-protein">
+    <h4>🧬 AI for Protein</h4>
+    <div class="aw-links">
+      <a class="aw-link" href="https://github.com/opendilab/awesome-AI-based-protein-design" target="_blank">
+        <span class="aw-icon">📦</span>
+        <span class="aw-info">
+          <span class="aw-name">awesome-AI-based-protein-design</span>
+          <span class="aw-desc">AI 기반 단백질 설계 논문 큐레이션 — 지속 업데이트</span>
+        </span>
+      </a>
+      <a class="aw-link" href="https://github.com/LirongWu/awesome-protein-representation-learning" target="_blank">
+        <span class="aw-icon">📦</span>
+        <span class="aw-info">
+          <span class="aw-name">awesome-protein-representation-learning</span>
+          <span class="aw-desc">단백질 표현 학습 논문 — NeurIPS/ICML 최신 커버리지</span>
+        </span>
+      </a>
+      <a class="aw-link" href="https://github.com/pansapiens/awesome-protein-design-software" target="_blank">
+        <span class="aw-icon">📦</span>
+        <span class="aw-info">
+          <span class="aw-name">awesome-protein-design-software</span>
+          <span class="aw-desc">단백질 구조 예측/설계 소프트웨어 — AlphaFold, ESMFold, RFdiffusion</span>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <div class="awesome-category cat-antibody">
+    <h4>💊 AI for Antibody</h4>
+    <div class="aw-links">
+      <a class="aw-link" href="https://github.com/youkq95/awesome-antibody" target="_blank">
+        <span class="aw-icon">📦</span>
+        <span class="aw-info">
+          <span class="aw-name">awesome-antibody</span>
+          <span class="aw-desc">항체 ML/AI 방법론 — 구조 예측, CDR 설계, 최적화</span>
+        </span>
+      </a>
+      <a class="aw-link" href="https://github.com/orion-laboratories/awesome-antibody-tools" target="_blank">
+        <span class="aw-icon">📦</span>
+        <span class="aw-info">
+          <span class="aw-name">awesome-antibody-tools</span>
+          <span class="aw-desc">항체 엔지니어링 & 개발 도구 모음</span>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <div class="awesome-category cat-docking">
+    <h4>🎯 Molecular Docking & Virtual Screening</h4>
+    <div class="aw-links">
+      <a class="aw-link" href="https://github.com/Thinklab-SJTU/awesome-molecular-docking" target="_blank">
+        <span class="aw-icon">📦</span>
+        <span class="aw-info">
+          <span class="aw-name">awesome-molecular-docking</span>
+          <span class="aw-desc">SJTU Thinklab — 분자 도킹 논문/리소스 (DL scoring 포함)</span>
+        </span>
+      </a>
+      <a class="aw-link" href="https://github.com/KyGao/awesome-docking" target="_blank">
+        <span class="aw-icon">📦</span>
+        <span class="aw-info">
+          <span class="aw-name">awesome-docking</span>
+          <span class="aw-desc">도킹 논문 큐레이션 — 딥러닝 스코어링, 포즈 예측</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
+
 </div>
 
 <!-- Footer -->
 <div class="footer">
   <p>21일 바이브 코딩 × AI 신약개발 부트캠프</p>
-  <p>가천대학교 남승윤 교수 연구실 · AI 기반 나노바디 엔지니어링 & 항암 치료제 개발</p>
+  <p>가천대학교 남승윤 · 서승용 · 이진혁 교수 연구실 · AI 기반 신약개발 & 항암 치료제 연구</p>
   <p style="margin-top:8px; opacity:0.5;">Made with 바이브 코딩 🎵</p>
 </div>
 
