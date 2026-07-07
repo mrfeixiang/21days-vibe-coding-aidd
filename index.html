@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>21일 바이브 코딩 × AIDD 부트캠프</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
   :root {
     --primary: #7C3AED;
@@ -884,6 +884,117 @@
     margin: 0 auto;
   }
 
+  /* Language Switcher */
+  .lang-switcher {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 200;
+    display: flex;
+    gap: 4px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 4px;
+  }
+
+  .lang-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+
+  .lang-btn.active {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  .lang-btn:hover:not(.active) {
+    color: var(--text);
+  }
+
+  /* Essential Tools */
+  .tools-section {
+    margin-top: 20px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+  }
+
+  .tools-section h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+  }
+
+  .tool-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tool-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+  }
+
+  .tool-card .tool-icon {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .tool-card .tool-name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+
+  .tool-card .tool-desc {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .tool-card .tool-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.6rem;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .tag-essential { background: rgba(16,185,129,0.12); color: var(--accent3); }
+  .tag-math { background: rgba(124,58,237,0.12); color: var(--primary-light); }
+  .tag-tool { background: rgba(6,182,212,0.12); color: var(--accent); }
+  .tag-ai { background: rgba(244,63,94,0.12); color: var(--accent2); }
+
   /* Responsive */
   @media (max-width: 640px) {
     .hero { padding: 50px 16px 36px; }
@@ -901,6 +1012,13 @@
 
 <div class="bg-mesh"></div>
 <div class="grid-lines"></div>
+
+<!-- Language Switcher -->
+<div class="lang-switcher">
+  <button class="lang-btn active" onclick="setLang('ko')">한국어</button>
+  <button class="lang-btn" onclick="setLang('zh')">中文</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+</div>
 
 <!-- Sticky Progress -->
 <div class="sticky-bar" id="stickyBar">
@@ -2049,7 +2167,7 @@ tab1, tab2, tab3, tab4, tab5 = st.<span class="fn">tabs</span>([
 
 <!-- Resources -->
 <div class="res-section">
-  <h3>참고 자료 & 도구</h3>
+  <h3 data-i18n="res_title">참고 자료 & 도구</h3>
   <div class="res-grid">
     <a class="res-card" href="https://www.rdkit.org/" target="_blank">
       <div class="rc-t">RDKit</div>
@@ -2096,8 +2214,8 @@ tab1, tab2, tab3, tab4, tab5 = st.<span class="fn">tabs</span>([
 
 <!-- Coding Beginner -->
 <div class="yt-section" style="margin-top:20px;">
-  <h3>📘 코딩 입문자를 위한 기초 학습 자료</h3>
-  <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:16px;">AIDD를 시작하기 전에 Python 기초를 다지고 싶다면 아래 자료부터 학습하세요.</p>
+  <h3 data-i18n="beginner_title">📘 코딩 입문자를 위한 기초 학습 자료</h3>
+  <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:16px;" data-i18n="beginner_desc">AIDD를 시작하기 전에 Python 기초를 다지고 싶다면 아래 자료부터 학습하세요.</p>
   <div class="yt-grid">
     <a class="yt-card" href="https://wikidocs.net/14569" target="_blank" style="border-left: 3px solid var(--primary-light);">
       <div class="yt-icon" style="color:var(--primary-light);">📗 WikiDocs</div>
@@ -2124,7 +2242,7 @@ tab1, tab2, tab3, tab4, tab5 = st.<span class="fn">tabs</span>([
 
 <!-- YouTube -->
 <div class="yt-section">
-  <h3>📺 추천 YouTube 강의</h3>
+  <h3 data-i18n="yt_title">📺 추천 YouTube 강의</h3>
   <div class="yt-grid">
     <a class="yt-card" href="https://www.youtube.com/watch?v=10BQTL99z_E" target="_blank">
       <div class="yt-icon">▶ YouTube</div>
@@ -2161,7 +2279,7 @@ tab1, tab2, tab3, tab4, tab5 = st.<span class="fn">tabs</span>([
 
 <!-- Awesome GitHub -->
 <div class="awesome-section">
-  <h3>⭐ Awesome GitHub 리포지토리</h3>
+  <h3 data-i18n="awesome_title">⭐ Awesome GitHub 리포지토리</h3>
 
   <div class="awesome-category cat-aidd">
     <h4>🧪 AI Drug Discovery (AIDD)</h4>
@@ -2292,6 +2410,108 @@ tab1, tab2, tab3, tab4, tab5 = st.<span class="fn">tabs</span>([
   </div>
 </div>
 
+<!-- Essential Tools & Environments -->
+<div class="tools-section">
+  <h3 data-i18n="tools_title">🛠 필수 도구 & 개발 환경</h3>
+  <div class="tool-grid">
+    <a class="tool-card" href="https://www.python.org/downloads/" target="_blank">
+      <span class="tool-tag tag-essential">Essential</span>
+      <span class="tool-icon">🐍</span>
+      <div class="tool-name">Python</div>
+      <div class="tool-desc" data-i18n="tool_python">AIDD의 핵심 언어. 3.10+ 권장. 데이터 분석, ML, 화학정보학 모두 Python 기반</div>
+    </a>
+    <a class="tool-card" href="https://jupyter.org/" target="_blank">
+      <span class="tool-tag tag-essential">Essential</span>
+      <span class="tool-icon">📓</span>
+      <div class="tool-name">Jupyter Notebook</div>
+      <div class="tool-desc" data-i18n="tool_jupyter">대화형 코딩 환경. 코드+시각화+문서를 한 곳에서. <code>pip install jupyterlab</code></div>
+    </a>
+    <a class="tool-card" href="https://colab.research.google.com/" target="_blank">
+      <span class="tool-tag tag-tool">Cloud</span>
+      <span class="tool-icon">☁️</span>
+      <div class="tool-name">Google Colab</div>
+      <div class="tool-desc" data-i18n="tool_colab">무료 GPU/TPU 지원 클라우드 노트북. 설치 없이 즉시 시작 가능</div>
+    </a>
+    <a class="tool-card" href="https://docs.conda.io/en/latest/miniconda.html" target="_blank">
+      <span class="tool-tag tag-tool">Env</span>
+      <span class="tool-icon">📦</span>
+      <div class="tool-name">Conda / Miniconda</div>
+      <div class="tool-desc" data-i18n="tool_conda">과학 패키지 관리자. RDKit, PyMOL 등 화학 도구 설치에 필수</div>
+    </a>
+    <a class="tool-card" href="https://code.visualstudio.com/" target="_blank">
+      <span class="tool-tag tag-tool">IDE</span>
+      <span class="tool-icon">💻</span>
+      <div class="tool-name">VS Code</div>
+      <div class="tool-desc" data-i18n="tool_vscode">가벼운 코드 에디터. Python, Jupyter, Git 확장 지원. AI 코딩 통합</div>
+    </a>
+    <a class="tool-card" href="https://cursor.com/" target="_blank">
+      <span class="tool-tag tag-ai">AI IDE</span>
+      <span class="tool-icon">⚡</span>
+      <div class="tool-name">Cursor</div>
+      <div class="tool-desc" data-i18n="tool_cursor">AI 네이티브 IDE. 바이브 코딩에 최적화된 개발 환경</div>
+    </a>
+    <a class="tool-card" href="https://git-scm.com/" target="_blank">
+      <span class="tool-tag tag-essential">Essential</span>
+      <span class="tool-icon">🔀</span>
+      <div class="tool-name">Git & GitHub</div>
+      <div class="tool-desc" data-i18n="tool_git">버전 관리 필수 도구. 코드 협업, 프로젝트 관리, 포트폴리오</div>
+    </a>
+    <a class="tool-card" href="https://streamlit.io/" target="_blank">
+      <span class="tool-tag tag-tool">App</span>
+      <span class="tool-icon">🎈</span>
+      <div class="tool-name">Streamlit</div>
+      <div class="tool-desc" data-i18n="tool_streamlit">Python만으로 웹 대시보드 제작. AIDD 파이프라인 시각화에 활용</div>
+    </a>
+  </div>
+</div>
+
+<!-- Math & CS Foundations -->
+<div class="tools-section" style="margin-top:20px;">
+  <h3 data-i18n="math_title">📐 수학 & CS 기초 학습 자료</h3>
+  <div class="yt-grid">
+    <a class="yt-card" href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab" target="_blank" style="border-left: 3px solid var(--primary-light);">
+      <div class="yt-icon" style="color:var(--primary-light);">▶ 3Blue1Brown</div>
+      <div class="yt-t" data-i18n="math_linalg_title">Essence of Linear Algebra</div>
+      <div class="yt-d" data-i18n="math_linalg_desc">선형대수의 직관적 이해. 벡터, 행렬, 고유값 등을 시각적으로 학습. ML/AIDD 필수 수학 기초</div>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank" style="border-left: 3px solid var(--accent);">
+      <div class="yt-icon" style="color:var(--accent);">▶ 3Blue1Brown</div>
+      <div class="yt-t" data-i18n="math_calc_title">Essence of Calculus</div>
+      <div class="yt-d" data-i18n="math_calc_desc">미적분의 본질. 미분, 적분, 편미분을 시각적으로 이해. 최적화/경사하강법 기초</div>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" target="_blank" style="border-left: 3px solid var(--accent2);">
+      <div class="yt-icon" style="color:var(--accent2);">▶ 3Blue1Brown</div>
+      <div class="yt-t" data-i18n="math_nn_title">Neural Networks</div>
+      <div class="yt-d" data-i18n="math_nn_desc">신경망의 직관적 이해. 역전파, 경사하강법을 시각적으로 설명. 딥러닝 입문 필수</div>
+    </a>
+    <a class="yt-card" href="https://www.bilibili.com/video/BV1ys411472E" target="_blank" style="border-left: 3px solid var(--gold);">
+      <div class="yt-icon" style="color:var(--gold);">📺 Bilibili</div>
+      <div class="yt-t" data-i18n="math_linalg_cn_title">线性代数 — MIT 18.06 (Gilbert Strang)</div>
+      <div class="yt-d" data-i18n="math_linalg_cn_desc">MIT 经典线性代数课程中文字幕版. 向量空间、特征值、SVD分解等核心概念</div>
+    </a>
+    <a class="yt-card" href="https://www.coursera.org/learn/machine-learning" target="_blank" style="border-left: 3px solid var(--accent3);">
+      <div class="yt-icon" style="color:var(--accent3);">🎓 Coursera</div>
+      <div class="yt-t">Machine Learning Specialization</div>
+      <div class="yt-d" data-i18n="math_ml_desc">Andrew Ng의 ML 입문 과정. 회귀, 분류, 신경망 기초. 무료 청강 가능</div>
+    </a>
+    <a class="yt-card" href="https://www.kaggle.com/learn" target="_blank" style="border-left: 3px solid #20BEFF;">
+      <div class="yt-icon" style="color:#20BEFF;">📊 Kaggle</div>
+      <div class="yt-t">Kaggle Learn</div>
+      <div class="yt-d" data-i18n="math_kaggle_desc">Python, Pandas, ML, 딥러닝 무료 마이크로 코스. 실습 중심 학습</div>
+    </a>
+    <a class="yt-card" href="https://immersivemath.com/ila/" target="_blank" style="border-left: 3px solid var(--primary-light);">
+      <div class="yt-icon" style="color:var(--primary-light);">📘 Interactive</div>
+      <div class="yt-t" data-i18n="math_immersive_title">Immersive Linear Algebra</div>
+      <div class="yt-d" data-i18n="math_immersive_desc">인터랙티브 선형대수 교과서. 3D 시각화로 벡터/행렬 개념을 직관적으로 학습</div>
+    </a>
+    <a class="yt-card" href="https://seeing-theory.brown.edu/" target="_blank" style="border-left: 3px solid var(--accent);">
+      <div class="yt-icon" style="color:var(--accent);">📘 Interactive</div>
+      <div class="yt-t">Seeing Theory</div>
+      <div class="yt-d" data-i18n="math_seeing_desc">확률/통계를 시각적으로 학습. Brown Univ. 프로젝트. 베이즈, 회귀 등</div>
+    </a>
+  </div>
+</div>
+
 </div>
 
 <!-- Footer -->
@@ -2351,6 +2571,225 @@ window.addEventListener('scroll', () => {
 });
 
 load();
+
+// === i18n Language Support ===
+const i18n = {
+  ko: {
+    page_title: "21일 바이브 코딩 × AIDD 부트캠프",
+    lab_badge: "🎵 가천대 Nam SY × Seo SY 연구실 · 2026 Summer Vibe!",
+    hero_title: "21일 바이브 코딩 ×<br>AI 신약개발 부트캠프",
+    hero_sub: "AI 코딩 도구와 실제 타겟(Target A~E)을 활용하여 Target-Based Drug Discovery 전 과정을 직접 구현하는 21일 실전 프로그램",
+    stat_days: "일", stat_targets: "타겟", stat_exercises: "실습 예제", stat_vibe: "바이브",
+    prof_name: "가천대 Nam SY × Seo SY Lab",
+    prof_title: "2026 Summer Vibe Coding Bootcamp 🎵",
+    prof_desc: '<strong>"바이브 코딩(Vibe Coding)"</strong>이란 AI에게 자연어로 원하는 것을 설명하면 AI가 코드를 작성해주는 새로운 프로그래밍 패러다임입니다. 이 부트캠프는 코딩 경험이 적은 연구원도 AI 도구를 활용하여 실제 신약개발 파이프라인을 구축할 수 있도록 설계되었습니다.',
+    target_label: "실습 타겟 분자",
+    progress_label: "학습 진도",
+    w1_btn: "1주차 · 기초", w1_sub: "바이브 코딩 + 환경 구축",
+    w2_btn: "2주차 · 심화", w2_sub: "구조 기반 약물 설계",
+    w3_btn: "3주차 · 실전", w3_sub: "통합 파이프라인 구축",
+    res_title: "참고 자료 & 도구",
+    beginner_title: "📘 코딩 입문자를 위한 기초 학습 자료",
+    beginner_desc: "AIDD를 시작하기 전에 Python 기초를 다지고 싶다면 아래 자료부터 학습하세요.",
+    yt_title: "📺 추천 YouTube 강의",
+    awesome_title: "⭐ Awesome GitHub 리포지토리",
+    tools_title: "🛠 필수 도구 & 개발 환경",
+    math_title: "📐 수학 & CS 기초 학습 자료",
+    footer1: "21일 바이브 코딩 × AI 신약개발 부트캠프",
+    footer2: "가천대 Nam SY × Seo SY Lab · 2026 Summer Vibe! · AI-Driven Drug Discovery",
+    footer3: "Made with 바이브 코딩 🎵",
+    tool_python: "AIDD의 핵심 언어. 3.10+ 권장. 데이터 분석, ML, 화학정보학 모두 Python 기반",
+    tool_jupyter: "대화형 코딩 환경. 코드+시각화+문서를 한 곳에서. pip install jupyterlab",
+    tool_colab: "무료 GPU/TPU 지원 클라우드 노트북. 설치 없이 즉시 시작 가능",
+    tool_conda: "과학 패키지 관리자. RDKit, PyMOL 등 화학 도구 설치에 필수",
+    tool_vscode: "가벼운 코드 에디터. Python, Jupyter, Git 확장 지원. AI 코딩 통합",
+    tool_cursor: "AI 네이티브 IDE. 바이브 코딩에 최적화된 개발 환경",
+    tool_git: "버전 관리 필수 도구. 코드 협업, 프로젝트 관리, 포트폴리오",
+    tool_streamlit: "Python만으로 웹 대시보드 제작. AIDD 파이프라인 시각화에 활용",
+    math_linalg_title: "Essence of Linear Algebra",
+    math_linalg_desc: "선형대수의 직관적 이해. 벡터, 행렬, 고유값 등을 시각적으로 학습. ML/AIDD 필수 수학 기초",
+    math_calc_title: "Essence of Calculus",
+    math_calc_desc: "미적분의 본질. 미분, 적분, 편미분을 시각적으로 이해. 최적화/경사하강법 기초",
+    math_nn_title: "Neural Networks",
+    math_nn_desc: "신경망의 직관적 이해. 역전파, 경사하강법을 시각적으로 설명. 딥러닝 입문 필수",
+    math_linalg_cn_title: "线性代数 — MIT 18.06 (Gilbert Strang)",
+    math_linalg_cn_desc: "MIT 경전 선형대수 강의 (중문자막). 벡터 공간, 고유값, SVD 분해 등 핵심 개념",
+    math_ml_desc: "Andrew Ng의 ML 입문 과정. 회귀, 분류, 신경망 기초. 무료 청강 가능",
+    math_kaggle_desc: "Python, Pandas, ML, 딥러닝 무료 마이크로 코스. 실습 중심 학습",
+    math_immersive_title: "Immersive Linear Algebra",
+    math_immersive_desc: "인터랙티브 선형대수 교과서. 3D 시각화로 벡터/행렬 개념을 직관적으로 학습",
+    math_seeing_desc: "확률/통계를 시각적으로 학습. Brown Univ. 프로젝트. 베이즈, 회귀 등",
+  },
+  zh: {
+    page_title: "21天 Vibe Coding × AIDD 训练营",
+    lab_badge: "🎵 加天大 Nam SY × Seo SY 实验室 · 2026 Summer Vibe!",
+    hero_title: "21天 Vibe Coding ×<br>AI 新药研发训练营",
+    hero_sub: "利用AI编程工具和实际靶标(Target A~E)，从零实现Target-Based Drug Discovery全流程的21天实战课程",
+    stat_days: "天", stat_targets: "靶标", stat_exercises: "实战练习", stat_vibe: "Vibe",
+    prof_name: "加天大 Nam SY × Seo SY Lab",
+    prof_title: "2026 Summer Vibe Coding Bootcamp 🎵",
+    prof_desc: '<strong>"Vibe Coding"</strong>是一种全新的编程范式——用自然语言向AI描述你想要的功能，AI自动生成代码。本训练营专为编程经验较少的研究人员设计，帮助你利用AI工具构建真实的新药研发管线。',
+    target_label: "实习靶标分子",
+    progress_label: "学习进度",
+    w1_btn: "第1周 · 基础", w1_sub: "Vibe Coding + 环境搭建",
+    w2_btn: "第2周 · 进阶", w2_sub: "基于结构的药物设计",
+    w3_btn: "第3周 · 实战", w3_sub: "完整管线构建",
+    res_title: "参考资料 & 工具",
+    beginner_title: "📘 编程入门基础学习资料",
+    beginner_desc: "在开始AIDD之前，如需夯实Python基础，请先学习以下资料。",
+    yt_title: "📺 推荐YouTube课程",
+    awesome_title: "⭐ Awesome GitHub 仓库",
+    tools_title: "🛠 必备工具 & 开发环境",
+    math_title: "📐 数学 & CS 基础学习资料",
+    footer1: "21天 Vibe Coding × AI 新药研发训练营",
+    footer2: "加天大 Nam SY × Seo SY Lab · 2026 Summer Vibe! · AI-Driven Drug Discovery",
+    footer3: "用 Vibe Coding 构建 🎵",
+    tool_python: "AIDD的核心语言。推荐3.10+。数据分析、ML、化学信息学均基于Python",
+    tool_jupyter: "交互式编程环境。代码+可视化+文档一体化。pip install jupyterlab",
+    tool_colab: "免费GPU/TPU云端Notebook。无需安装，即开即用",
+    tool_conda: "科学包管理器。安装RDKit、PyMOL等化学工具必备",
+    tool_vscode: "轻量级代码编辑器。支持Python、Jupyter、Git扩展。AI编程集成",
+    tool_cursor: "AI原生IDE。为Vibe Coding优化的开发环境",
+    tool_git: "版本管理必备工具。代码协作、项目管理、作品集",
+    tool_streamlit: "纯Python构建Web仪表板。用于AIDD管线可视化",
+    math_linalg_title: "线性代数的本质 (3Blue1Brown)",
+    math_linalg_desc: "直观理解线性代数。通过可视化学习向量、矩阵、特征值等核心概念。ML/AIDD必备数学基础",
+    math_calc_title: "微积分的本质 (3Blue1Brown)",
+    math_calc_desc: "微积分的本质。直观理解微分、积分、偏微分。优化/梯度下降法基础",
+    math_nn_title: "神经网络 (3Blue1Brown)",
+    math_nn_desc: "直观理解神经网络。可视化讲解反向传播和梯度下降。深度学习入门必看",
+    math_linalg_cn_title: "线性代数 — MIT 18.06 (Gilbert Strang)",
+    math_linalg_cn_desc: "MIT经典线性代数课程中文字幕版。向量空间、特征值、SVD分解等核心概念",
+    math_ml_desc: "Andrew Ng的ML入门课程。回归、分类、神经网络基础。可免费旁听",
+    math_kaggle_desc: "Python、Pandas、ML、深度学习免费微课程。以实践为核心",
+    math_immersive_title: "沉浸式线性代数",
+    math_immersive_desc: "交互式线性代数教材。通过3D可视化直观学习向量/矩阵概念",
+    math_seeing_desc: "可视化学习概率/统计。Brown大学项目。贝叶斯、回归等",
+  },
+  en: {
+    page_title: "21-Day Vibe Coding × AIDD Bootcamp",
+    lab_badge: "🎵 Gachon Univ. Nam SY × Seo SY Lab · 2026 Summer Vibe!",
+    hero_title: "21-Day Vibe Coding ×<br>AI Drug Discovery Bootcamp",
+    hero_sub: "Build a complete Target-Based Drug Discovery pipeline in 21 days using AI coding tools and real targets (Target A~E)",
+    stat_days: "Days", stat_targets: "Targets", stat_exercises: "Exercises", stat_vibe: "Vibe",
+    prof_name: "Gachon Univ. Nam SY × Seo SY Lab",
+    prof_title: "2026 Summer Vibe Coding Bootcamp 🎵",
+    prof_desc: '<strong>"Vibe Coding"</strong> is a new programming paradigm where you describe what you want in natural language and AI writes the code. This bootcamp is designed for researchers with limited coding experience to build real drug discovery pipelines using AI tools.',
+    target_label: "Practice Targets",
+    progress_label: "Progress",
+    w1_btn: "Week 1 · Basics", w1_sub: "Vibe Coding + Setup",
+    w2_btn: "Week 2 · Advanced", w2_sub: "Structure-Based Drug Design",
+    w3_btn: "Week 3 · Capstone", w3_sub: "End-to-End Pipeline",
+    res_title: "References & Tools",
+    beginner_title: "📘 Coding Beginner Resources",
+    beginner_desc: "Build your Python foundation before starting AIDD with these resources.",
+    yt_title: "📺 Recommended YouTube Courses",
+    awesome_title: "⭐ Awesome GitHub Repositories",
+    tools_title: "🛠 Essential Tools & Dev Environment",
+    math_title: "📐 Math & CS Foundations",
+    footer1: "21-Day Vibe Coding × AI Drug Discovery Bootcamp",
+    footer2: "Gachon Univ. Nam SY × Seo SY Lab · 2026 Summer Vibe! · AI-Driven Drug Discovery",
+    footer3: "Made with Vibe Coding 🎵",
+    tool_python: "Core language for AIDD. 3.10+ recommended. Data analysis, ML, cheminformatics all Python-based",
+    tool_jupyter: "Interactive coding environment. Code + visualization + docs in one place. pip install jupyterlab",
+    tool_colab: "Free GPU/TPU cloud notebook. Start instantly with zero setup",
+    tool_conda: "Scientific package manager. Essential for installing RDKit, PyMOL, and other chemistry tools",
+    tool_vscode: "Lightweight code editor. Python, Jupyter, Git extensions. AI coding integration",
+    tool_cursor: "AI-native IDE. Development environment optimized for Vibe Coding",
+    tool_git: "Essential version control. Code collaboration, project management, portfolio",
+    tool_streamlit: "Build web dashboards with pure Python. For AIDD pipeline visualization",
+    math_linalg_title: "Essence of Linear Algebra",
+    math_linalg_desc: "Visual intuition for linear algebra. Vectors, matrices, eigenvalues — essential math for ML/AIDD",
+    math_calc_title: "Essence of Calculus",
+    math_calc_desc: "The essence of calculus. Visually understand derivatives, integrals. Foundation for optimization",
+    math_nn_title: "Neural Networks",
+    math_nn_desc: "Intuitive understanding of neural networks. Visual explanation of backpropagation and gradient descent",
+    math_linalg_cn_title: "Linear Algebra — MIT 18.06 (Gilbert Strang)",
+    math_linalg_cn_desc: "Classic MIT linear algebra course. Vector spaces, eigenvalues, SVD decomposition (Chinese subtitles)",
+    math_ml_desc: "Andrew Ng's ML intro course. Regression, classification, neural network basics. Free to audit",
+    math_kaggle_desc: "Free micro-courses for Python, Pandas, ML, Deep Learning. Hands-on focused",
+    math_immersive_title: "Immersive Linear Algebra",
+    math_immersive_desc: "Interactive linear algebra textbook. Learn vector/matrix concepts through 3D visualization",
+    math_seeing_desc: "Visual probability & statistics. Brown Univ. project. Bayes, regression, and more",
+  }
+};
+
+function setLang(lang) {
+  // Update buttons
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+
+  const t = i18n[lang];
+  if (!t) return;
+
+  // Update page title
+  document.title = t.page_title;
+
+  // Update hero
+  document.querySelector('.lab-badge').textContent = t.lab_badge;
+  document.querySelector('.hero h1').innerHTML = t.hero_title;
+  document.querySelector('.hero-sub').textContent = t.hero_sub;
+
+  // Stats
+  const labels = document.querySelectorAll('.stat-label');
+  if (labels.length >= 4) {
+    labels[0].textContent = t.stat_days;
+    labels[1].textContent = t.stat_targets;
+    labels[2].textContent = t.stat_exercises;
+    labels[3].textContent = t.stat_vibe;
+  }
+
+  // Professor card
+  document.querySelector('.prof-name').textContent = t.prof_name;
+  document.querySelector('.prof-title').textContent = t.prof_title;
+  document.querySelector('.professor-card .desc').innerHTML = t.prof_desc;
+
+  // Target label
+  document.querySelector('.target-showcase h3').textContent = t.target_label;
+
+  // Progress
+  document.querySelector('.sticky-label').textContent = t.progress_label;
+
+  // Week tabs
+  const tabs = document.querySelectorAll('.tab-btn');
+  if (tabs.length >= 3) {
+    tabs[0].childNodes[0].textContent = t.w1_btn + ' ';
+    tabs[0].querySelector('.tab-sub').textContent = t.w1_sub;
+    tabs[1].childNodes[0].textContent = t.w2_btn + ' ';
+    tabs[1].querySelector('.tab-sub').textContent = t.w2_sub;
+    tabs[2].childNodes[0].textContent = t.w3_btn + ' ';
+    tabs[2].querySelector('.tab-sub').textContent = t.w3_sub;
+  }
+
+  // Section titles
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) el.textContent = t[key];
+  });
+
+  // Footer
+  const footerPs = document.querySelectorAll('.footer p');
+  if (footerPs.length >= 3) {
+    footerPs[0].textContent = t.footer1;
+    footerPs[1].textContent = t.footer2;
+    footerPs[2].textContent = t.footer3;
+  }
+
+  // Font family
+  if (lang === 'zh') {
+    document.body.style.fontFamily = "'Noto Sans SC', -apple-system, sans-serif";
+  } else if (lang === 'ko') {
+    document.body.style.fontFamily = "'Noto Sans KR', -apple-system, sans-serif";
+  } else {
+    document.body.style.fontFamily = "-apple-system, 'Segoe UI', sans-serif";
+  }
+
+  localStorage.setItem('vibe-aidd-lang', lang);
+}
+
+// Load saved language
+const savedLang = localStorage.getItem('vibe-aidd-lang');
+if (savedLang && savedLang !== 'ko') setLang(savedLang);
 </script>
 </body>
 </html>
