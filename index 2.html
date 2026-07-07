@@ -1020,7 +1020,7 @@
         <span class="st">"HBA"</span>: Descriptors.<span class="fn">NumHAcceptors</span>(mol),
     }
 
-<span class="cm"># 테스트: Target A 억제제 후보</span>
+<span class="cm"># 테스트: TEAD 억제제 후보</span>
 result = <span class="fn">calc_properties</span>(<span class="st">"c1ccc2c(c1)c1ccnc3ccccc3c1[nH]2"</span>)
 <span class="fn">print</span>(result)
       </div>
@@ -1081,7 +1081,7 @@ img.<span class="fn">save</span>(<span class="st">"kinase_inhibitors.png"</span>
       </div>
       <div class="target-box">
         <h5>🎯 우리 연구실 타겟 적용</h5>
-        <p>Compound X (Target A 억제제)의 SMILES를 구하고, 분자 성질을 계산해보세요. Tetracyclic heterocyclic 구조의 2D 이미지를 생성하고 Lipinski 규칙을 확인합니다.</p>
+        <p>Compound X (Target A 억제제)의 SMILES를 구하고, 분자 성질을 계산해보세요. Tetracyclic pyrazinocarbazole 구조의 2D 이미지를 생성하고 Lipinski 규칙을 확인합니다.</p>
       </div>
       <div class="done-check">
         <input type="checkbox" id="c2" onchange="upd()">
@@ -1111,17 +1111,17 @@ img.<span class="fn">save</span>(<span class="st">"kinase_inhibitors.png"</span>
         <li>API를 이용한 자동 데이터 수집</li>
       </ul>
       <div class="prompt-block">
-        <p>"Biopython을 사용해서 Target A 단백질(UniProt ID: Q15561)의 서열을 가져오고, Target A-TF 결합 도메인(residue 217-434)만 추출해서 FASTA 파일로 저장해줘. PDB에서 관련 구조(6GEI)도 다운로드해줘."</p>
+        <p>"Biopython을 사용해서 Target A protein 단백질(UniProt ID: Q15561)의 서열을 가져오고, YAP 결합 도메인(residue 217-434)만 추출해서 FASTA 파일로 저장해줘. PDB에서 관련 구조(6GEI)도 다운로드해줘."</p>
       </div>
       <div class="code-block">
         <span class="code-label">Biopython</span>
 <span class="kw">from</span> Bio <span class="kw">import</span> SeqIO, PDB
 <span class="kw">import</span> requests
 
-<span class="cm"># UniProt에서 Target A 서열 가져오기</span>
+<span class="cm"># UniProt에서 Target A protein 서열 가져오기</span>
 url = <span class="st">"https://rest.uniprot.org/uniprotkb/Q15561.fasta"</span>
 response = requests.<span class="fn">get</span>(url)
-<span class="kw">with</span> <span class="fn">open</span>(<span class="st">"Target A.fasta"</span>, <span class="st">"w"</span>) <span class="kw">as</span> f:
+<span class="kw">with</span> <span class="fn">open</span>(<span class="st">"Target A protein.fasta"</span>, <span class="st">"w"</span>) <span class="kw">as</span> f:
     f.<span class="fn">write</span>(response.text)
 
 <span class="cm"># PDB 구조 다운로드</span>
@@ -1129,9 +1129,9 @@ pdbl = PDB.<span class="fn">PDBList</span>()
 pdbl.<span class="fn">retrieve_pdb_file</span>(<span class="st">"6GEI"</span>, file_format=<span class="st">"pdb"</span>)
 
 <span class="cm"># 서열 파싱</span>
-record = SeqIO.<span class="fn">read</span>(<span class="st">"Target A.fasta"</span>, <span class="st">"fasta"</span>)
-yap_domain = record.seq[<span class="nu">216</span>:<span class="nu">434</span>]  <span class="cm"># Target A-TF 결합 도메인</span>
-<span class="fn">print</span>(<span class="st">f"Target A-TF 결합 도메인 길이: </span>{<span class="fn">len</span>(yap_domain)}<span class="st"> aa"</span>)
+record = SeqIO.<span class="fn">read</span>(<span class="st">"Target A protein.fasta"</span>, <span class="st">"fasta"</span>)
+yap_domain = record.seq[<span class="nu">216</span>:<span class="nu">434</span>]  <span class="cm"># YAP 결합 도메인</span>
+<span class="fn">print</span>(<span class="st">f"YAP 결합 도메인 길이: </span>{<span class="fn">len</span>(yap_domain)}<span class="st"> aa"</span>)
       </div>
       <div class="done-check">
         <input type="checkbox" id="c3" onchange="upd()">
@@ -1161,14 +1161,14 @@ yap_domain = record.seq[<span class="nu">216</span>:<span class="nu">434</span>]
         <li>PandasTools: DataFrame에 분자 구조 포함</li>
       </ul>
       <div class="prompt-block">
-        <p>"ChEMBL API에서 Target A(Target ID: CHEMBL4523279) 관련 화합물의 IC50 데이터를 가져와서 Pandas DataFrame으로 정리해줘. IC50 < 1μM인 화합물만 필터링하고, MW, LogP, IC50 기준으로 SAR 테이블을 만들어줘."</p>
+        <p>"ChEMBL API에서 Target A protein(Target ID: CHEMBL4523279) 관련 화합물의 IC50 데이터를 가져와서 Pandas DataFrame으로 정리해줘. IC50 < 1μM인 화합물만 필터링하고, MW, LogP, IC50 기준으로 SAR 테이블을 만들어줘."</p>
       </div>
       <div class="code-block">
         <span class="code-label">ChEMBL + Pandas</span>
 <span class="kw">from</span> chembl_webresource_client.new_client <span class="kw">import</span> new_client
 <span class="kw">import</span> pandas <span class="kw">as</span> pd
 
-<span class="cm"># ChEMBL에서 Target A 활성 데이터 가져오기</span>
+<span class="cm"># ChEMBL에서 Target A protein 활성 데이터 가져오기</span>
 activity = new_client.activity
 res = activity.<span class="fn">filter</span>(
     target_chembl_id=<span class="st">"CHEMBL4523279"</span>,
@@ -1239,7 +1239,7 @@ coords = tsne.<span class="fn">fit_transform</span>(X)
 plt.<span class="fn">scatter</span>(coords[:,<span class="nu">0</span>], coords[:,<span class="nu">1</span>], c=ic50_values,
            cmap=<span class="st">"RdYlGn_r"</span>, s=<span class="nu">50</span>, edgecolors=<span class="st">"white"</span>)
 plt.<span class="fn">colorbar</span>(label=<span class="st">"IC50 (μM)"</span>)
-plt.<span class="fn">title</span>(<span class="st">"Chemical Space — Target A Inhibitors"</span>)
+plt.<span class="fn">title</span>(<span class="st">"Chemical Space — TEAD Inhibitors"</span>)
       </div>
       <div class="done-check">
         <input type="checkbox" id="c5" onchange="upd()">
@@ -1271,7 +1271,7 @@ plt.<span class="fn">title</span>(<span class="st">"Chemical Space — Target A 
       <div class="target-box">
         <h5>🎯 연구실 사례: Target A 억제제 개발</h5>
         <p>
-          <strong>타겟:</strong> Target A 전사 복합체 (Signaling Pathway A)<br>
+          <strong>타겟:</strong> Target A 전사 복합체 (Hippo signaling pathway)<br>
           <strong>전략:</strong> Interface-3 결합 부위 타겟팅<br>
           <strong>방법:</strong> 구조 기반 약물 설계 (SBDD) + SAR 최적화<br>
           <strong>성과:</strong> 37개 화합물 합성, 리드 화합물 9d 발굴<br>
@@ -1301,7 +1301,7 @@ plt.<span class="fn">title</span>(<span class="st">"Chemical Space — Target A 
       <div class="exercise">
         <h5>🧪 Target C 타겟 프로파일링</h5>
         <ul>
-          <li>바이브 코딩으로 Target C (수용체 타이로신 키나아제) 자동 프로파일링 스크립트 생성</li>
+          <li>바이브 코딩으로 Target C(Discoidin Domain Receptor 1) 자동 프로파일링 스크립트 생성</li>
           <li>UniProt에서 Target C 서열 정보 수집</li>
           <li>ChEMBL에서 Target C 억제제 활성 데이터 다운로드</li>
           <li>IC50 분포 히스토그램 + Lipinski 분석 시각화</li>
@@ -1345,10 +1345,10 @@ plt.<span class="fn">title</span>(<span class="st">"Chemical Space — Target A 
         <li><code>py3Dmol</code>: Jupyter에서 3D 단백질 시각화</li>
         <li>결합 포켓(Binding Pocket) 탐지: <code>fpocket</code></li>
         <li>단백질-리간드 상호작용 분석: 수소결합, π-π, 소수성</li>
-        <li>Target A-Target A-TF 결합 인터페이스 구조 분석</li>
+        <li>Target A protein-YAP 결합 인터페이스 구조 분석</li>
       </ul>
       <div class="prompt-block">
-        <p>"PDB ID 6GEI를 다운로드해서 py3Dmol로 시각화해줘. Target A의 Interface-3 결합 포켓(잔기 Leu272, Phe276, Val382, Phe386 주변)을 빨간색 표면으로 강조해줘. 기존 결합 리간드도 스틱 모델로 보여줘."</p>
+        <p>"PDB ID 6GEI를 다운로드해서 py3Dmol로 시각화해줘. Target A protein의 Interface-3 결합 포켓(잔기 Leu272, Phe276, Val382, Phe386 주변)을 빨간색 표면으로 강조해줘. 기존 결합 리간드도 스틱 모델로 보여줘."</p>
       </div>
       <div class="code-block">
         <span class="code-label">py3Dmol</span>
@@ -1399,7 +1399,7 @@ view.<span class="fn">show</span>()
         <li>결과 해석: 결합 에너지(kcal/mol), 포즈 분석</li>
       </ul>
       <div class="prompt-block">
-        <p>"Target A(PDB: 6GEI)의 Interface-3 포켓에 Compound X를 도킹해줘. 단백질 준비(물분자 제거, 수소 추가), PDBQT 변환, 도킹 박스 설정, Vina 실행까지 전 과정을 자동화해줘."</p>
+        <p>"Target A protein(PDB: 6GEI)의 Interface-3 포켓에 Compound X를 도킹해줘. 단백질 준비(물분자 제거, 수소 추가), PDBQT 변환, 도킹 박스 설정, Vina 실행까지 전 과정을 자동화해줘."</p>
       </div>
       <div class="code-block">
         <span class="code-label">AutoDock Vina</span>
@@ -1408,7 +1408,7 @@ view.<span class="fn">show</span>()
 
 <span class="cm"># Vina 도킹 설정</span>
 v = <span class="fn">Vina</span>(sf_name=<span class="st">"vina"</span>)
-v.<span class="fn">set_receptor</span>(<span class="st">"Target A_prepared.pdbqt"</span>)
+v.<span class="fn">set_receptor</span>(<span class="st">"Target A protein_prepared.pdbqt"</span>)
 v.<span class="fn">set_ligand_from_file</span>(<span class="st">"compound_x.pdbqt"</span>)
 
 <span class="cm"># Interface-3 결합 포켓 중심 좌표</span>
@@ -1452,7 +1452,7 @@ energies = v.<span class="fn">energies</span>(n_poses=<span class="nu">5</span>)
         <li>워크스테이션 활용: SSH로 리눅스 서버 연결</li>
       </ul>
       <div class="prompt-block">
-        <p>"ZINC 데이터베이스에서 MW 300-500, LogP 1-4인 화합물 1000개를 다운로드하고, Target A Interface-3 포켓에 배치 도킹을 실행해줘. 결과를 도킹 점수 순으로 정렬해서 상위 50개를 CSV로 저장해줘. SSH로 linux-workstation에서 실행해줘."</p>
+        <p>"ZINC 데이터베이스에서 MW 300-500, LogP 1-4인 화합물 1000개를 다운로드하고, Target A protein Interface-3 포켓에 배치 도킹을 실행해줘. 결과를 도킹 점수 순으로 정렬해서 상위 50개를 CSV로 저장해줘. SSH로 linux-workstation에서 실행해줘."</p>
       </div>
       <div class="code-block">
         <span class="code-label">배치 도킹 자동화</span>
@@ -1463,7 +1463,7 @@ energies = v.<span class="fn">energies</span>(n_poses=<span class="nu">5</span>)
 <span class="kw">def</span> <span class="fn">dock_one</span>(ligand_file: Path) -> dict:
     <span class="st">"""단일 리간드 도킹"""</span>
     v = <span class="fn">Vina</span>(sf_name=<span class="st">"vina"</span>)
-    v.<span class="fn">set_receptor</span>(<span class="st">"Target A.pdbqt"</span>)
+    v.<span class="fn">set_receptor</span>(<span class="st">"Target A protein.pdbqt"</span>)
     v.<span class="fn">set_ligand_from_file</span>(<span class="fn">str</span>(ligand_file))
     v.<span class="fn">compute_vina_maps</span>(center=center, box_size=box)
     v.<span class="fn">dock</span>(exhaustiveness=<span class="nu">8</span>)
@@ -1562,7 +1562,7 @@ catalog = FilterCatalog.<span class="fn">FilterCatalog</span>(params)
         <li>특징 중요도 → SAR 인사이트 도출</li>
       </ul>
       <div class="prompt-block">
-        <p>"ChEMBL에서 Target B-WT 억제제 데이터를 가져와서, Morgan Fingerprint를 피처로 사용하고 IC50 < 100nM이면 active로 분류하는 Random Forest 모델을 만들어줘. 5-fold CV 결과와 ROC 커브를 그려줘."</p>
+        <p>"ChEMBL에서 EGFR 억제제 데이터를 가져와서, Morgan Fingerprint를 피처로 사용하고 IC50 < 100nM이면 active로 분류하는 Random Forest 모델을 만들어줘. 5-fold CV 결과와 ROC 커브를 그려줘."</p>
       </div>
       <div class="code-block">
         <span class="code-label">QSAR 모델</span>
@@ -1612,7 +1612,7 @@ scores = <span class="fn">cross_val_score</span>(rf, X, y, cv=<span class="nu">5
         <li>타겟 검증: 약물 내성 기전 분석</li>
       </ul>
       <div class="prompt-block">
-        <p>"GEO에서 흑색종 내성 데이터셋(GSE75299)을 다운로드하고, BRAF 억제제 내성 vs 감수성 샘플 간 차등 발현 분석을 해줘. Pathway A 관련 유전자(TargetA_TF, Target A1-4, CTGF, CYR61)의 발현 변화를 heatmap으로 보여줘."</p>
+        <p>"GEO에서 흑색종 내성 데이터셋(GSE75299)을 다운로드하고, BRAF 억제제 내성 vs 감수성 샘플 간 차등 발현 분석을 해줘. Hippo pathway 관련 유전자(TargetA_TF1, Target A1-4, CTGF, CYR61)의 발현 변화를 heatmap으로 보여줘."</p>
       </div>
       <div class="code-block">
         <span class="code-label">GEO 분석</span>
@@ -1623,8 +1623,8 @@ scores = <span class="fn">cross_val_score</span>(rf, X, y, cv=<span class="nu">5
 gse = GEOparse.<span class="fn">get_GEO</span>(<span class="st">"GSE75299"</span>)
 df_expr = gse.pivot_samples(<span class="st">"VALUE"</span>)
 
-<span class="cm"># Pathway A 유전자 추출</span>
-hippo_genes = [<span class="st">"TargetA_TF"</span>, <span class="st">"TargetA1"</span>, <span class="st">"TargetA2"</span>, <span class="st">"TargetA3"</span>, <span class="st">"Target A"</span>,
+<span class="cm"># Hippo pathway 유전자 추출</span>
+hippo_genes = [<span class="st">"TargetA_TF1"</span>, <span class="st">"Target A1"</span>, <span class="st">"Target A2"</span>, <span class="st">"Target A3"</span>, <span class="st">"Target A protein"</span>,
                <span class="st">"CTGF"</span>, <span class="st">"CYR61"</span>, <span class="st">"ANKRD1"</span>]
 
 <span class="cm"># GSEA 실행</span>
@@ -1661,7 +1661,7 @@ gsea_results = gp.<span class="fn">prerank</span>(
       <div class="exercise">
         <h5>🧪 Target B 구조 기반 약물 설계</h5>
         <ul>
-          <li>PDB에서 Target B-WT 구조(5CNO) 다운로드 & 포켓 분석</li>
+          <li>PDB에서 EGFR 구조(5CNO) 다운로드 & 포켓 분석</li>
           <li>Target B 변이 구조 모델링 (바이브 코딩으로 자동화)</li>
           <li>ZINC에서 fragment library 가상 스크리닝</li>
           <li>상위 히트에 ADMET 필터 적용</li>
@@ -1708,7 +1708,7 @@ gsea_results = gp.<span class="fn">prerank</span>(
         <li>R-group 열거 & 가상 라이브러리 생성</li>
       </ul>
       <div class="prompt-block">
-        <p>"리드 화합물의 스캐폴드를 유지하면서 R-group을 자동으로 변환하여 50개의 유사체(analog)를 생성해줘. 각 유사체의 Lipinski 규칙 위반 여부와 예측 LogP를 계산해서 테이블로 정리해줘."</p>
+        <p>"Compound X의 스캐폴드를 유지하면서 R-group을 자동으로 변환하여 50개의 유사체(analog)를 생성해줘. 각 유사체의 Lipinski 규칙 위반 여부와 예측 LogP를 계산해서 테이블로 정리해줘."</p>
       </div>
       <div class="code-block">
         <span class="code-label">R-group 열거</span>
@@ -1772,7 +1772,7 @@ df_analogs = pd.<span class="fn">DataFrame</span>(analogs)
 
 <span class="cm"># FASTA 파일에서 Target D 서열 읽기</span>
 sequences = []
-<span class="kw">for</span> record <span class="kw">in</span> SeqIO.<span class="fn">parse</span>(<span class="st">"target_d_seqs.fasta"</span>, <span class="st">"fasta"</span>):
+<span class="kw">for</span> record <span class="kw">in</span> SeqIO.<span class="fn">parse</span>(<span class="st">"nanobodies.fasta"</span>, <span class="st">"fasta"</span>):
     sequences.<span class="fn">append</span>((<span class="fn">str</span>(record.id), <span class="fn">str</span>(record.seq)))
 
 <span class="cm"># IMGT 넘버링으로 CDR 영역 추출</span>
@@ -1830,8 +1830,8 @@ plt.<span class="fn">title</span>(<span class="st">"Species X CDR3 길이 분포
     <span class="kw">return</span> response.text  <span class="cm"># PDB format</span>
 
 <span class="cm"># Target D 구조 예측</span>
-target_d_seq = <span class="st">"QVQLVESGGGLVQPGGSLRLSCAAS..."</span>
-pdb_text = <span class="fn">predict_structure</span>(target_d_seq)
+nanobody_seq = <span class="st">"QVQLVESGGGLVQPGGSLRLSCAAS..."</span>
+pdb_text = <span class="fn">predict_structure</span>(nanobody_seq)
 
 <span class="cm"># 3D 시각화 (pLDDT 색깔)</span>
 view = py3Dmol.<span class="fn">view</span>()
@@ -1877,7 +1877,7 @@ view.<span class="fn">zoomTo</span>()
 parser = <span class="fn">PDBParser</span>()
 structure = parser.<span class="fn">get_structure</span>(<span class="st">"complex"</span>, <span class="st">"3KYS.pdb"</span>)
 
-<span class="cm"># 체인 A(Target A) vs 체인 B(Target A-TF)의 접촉 잔기</span>
+<span class="cm"># 체인 A(Target A protein) vs 체인 B(YAP)의 접촉 잔기</span>
 chain_a = [a <span class="kw">for</span> a <span class="kw">in</span> structure[<span class="nu">0</span>][<span class="st">"A"</span>].<span class="fn">get_atoms</span>()]
 chain_b = [a <span class="kw">for</span> a <span class="kw">in</span> structure[<span class="nu">0</span>][<span class="st">"B"</span>].<span class="fn">get_atoms</span>()]
 
@@ -1888,8 +1888,8 @@ contacts = []
     nearby = ns.<span class="fn">search</span>(atom.<span class="fn">get_vector</span>().<span class="fn">get_array</span>(), cutoff)
     <span class="kw">if</span> nearby:
         contacts.<span class="fn">append</span>({
-            <span class="st">"Target A-TF_res"</span>: atom.<span class="fn">get_parent</span>().<span class="fn">get_resname</span>(),
-            <span class="st">"TargetA_res"</span>: nearby[<span class="nu">0</span>].<span class="fn">get_parent</span>().<span class="fn">get_resname</span>(),
+            <span class="st">"YAP_res"</span>: atom.<span class="fn">get_parent</span>().<span class="fn">get_resname</span>(),
+            <span class="st">"TEAD_res"</span>: nearby[<span class="nu">0</span>].<span class="fn">get_parent</span>().<span class="fn">get_resname</span>(),
             <span class="st">"distance"</span>: atom - nearby[<span class="nu">0</span>]
         })
       </div>
@@ -1973,7 +1973,7 @@ st.<span class="fn">title</span>(<span class="st">"🧬 AI Drug Discovery Pipeli
 
 <span class="cm"># 사이드바: 타겟 입력</span>
 pdb_id = st.sidebar.<span class="fn">text_input</span>(<span class="st">"PDB ID"</span>, <span class="st">"6GEI"</span>)
-target_name = st.sidebar.<span class="fn">text_input</span>(<span class="st">"타겟명"</span>, <span class="st">"Target A"</span>)
+target_name = st.sidebar.<span class="fn">text_input</span>(<span class="st">"타겟명"</span>, <span class="st">"Target A protein"</span>)
 
 <span class="cm"># 5단계 파이프라인</span>
 tab1, tab2, tab3, tab4, tab5 = st.<span class="fn">tabs</span>([
@@ -2016,7 +2016,7 @@ tab1, tab2, tab3, tab4, tab5 = st.<span class="fn">tabs</span>([
         <h5>🧪 프로젝트 옵션 (택 1)</h5>
         <ul>
           <li><strong>옵션 A:</strong> Target A Interface-3 차세대 억제제 — Compound X의 scaffold hopping으로 새로운 시리즈 설계</li>
-          <li><strong>옵션 B:</strong> Target B 선택적 억제제 — 야생형 Target B-WT 대비 선택성 최적화 파이프라인</li>
+          <li><strong>옵션 B:</strong> Target B 선택적 억제제 — 야생형 EGFR 대비 선택성 최적화 파이프라인</li>
           <li><strong>옵션 C:</strong> 항 Target B Target D 설계 — CDR3 엔지니어링을 통한 친화도 최적화</li>
           <li><strong>옵션 D:</strong> Target C 억제제 가상 스크리닝 — 전체 SBDD 파이프라인 구현</li>
           <li><strong>옵션 E:</strong> 자유 주제 — 본인 연구 관심사에 맞는 타겟 선정</li>
